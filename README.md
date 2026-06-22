@@ -37,3 +37,18 @@ Por ser desenvolvido em PowerShell nativo, o projeto **não necessita da instala
 3. Permita a execução de scripts na sua sessão atual executando:
 ```powershell
    Set-ExecutionPolicy Unrestricted -Scope Process -Force
+```
+
+
+| Código da Função | Nome na Interface (Botão) | Comando Executado em Segundo Plano | Problema Resolvido no Hospital | Impacto / Benefício |
+| :---: | :--- | :--- | :--- | :--- |
+| **01** | `1. Corrigir Internet` | `ipconfig /release` <br> `ipconfig /renew` | PC perdeu o IP correto ou está com conectividade nula/limitada na rede local. | Restaura o sinal de rede e internet sem reiniciar o computador. |
+| **02** | `2. Limpar Memória de Sites` | `ipconfig /flushdns` | Sistemas web do hospital (prontuário, laudos) não carregam após atualizações no servidor. | Limpa o cache de DNS, forçando o navegador a buscar o endereço IP mais recente do sistema. |
+| **03** | `3. DNS Automático` | `netsh interface ip set dns name="Ethernet" source=dhcp` | Máquina estática ou modificada manualmente por engano, bloqueando o acesso à rede interna. | Força a placa de rede a obter o DNS corporativo correto diretamente do servidor DHCP. |
+| **04** | `4. Destravar Impressora` | `net stop spooler` <br> `del /f /q %systemroot%\System32\Spool\Printers\*` <br> `net start spooler` | Documentos acumulados na fila de impressão travando as receitas ou etiquetas de setores críticos. | Limpa a fila corrompida e reinicia o serviço de impressão. **(Campeão de chamados do hospital)**. |
+| **05** | `5. Atualizar Permissões` | `gpupdate /force` | Usuário mudou de setor, ou novas políticas/mapeamentos de rede precisam ser aplicados na hora. | Sincroniza o computador imediatamente com as novas regras e acessos do Active Directory (AD). |
+| **06** | `6. Limpar Arquivos Temps` | `Remove-Item "$env:TEMP\*"` <br> `Remove-Item "C:\Windows\Temp\*"` | Lentidão geral no sistema causada pelo acúmulo de cache e falta de espaço em disco em PCs antigos. | Elimina arquivos residuais que poluem o armazenamento, melhorando o desempenho da máquina. |
+| **07** | `7. Esvaziar Lixeira` | `Clear-RecycleBin -Confirm:$false` | Discos rígidos cheios (especialmente em recepções) devido a PDFs e relatórios deletados mas não eliminados. | Libera espaço físico em disco de forma definitiva e imediata, com apenas um clique. |
+| **08** | `8. Meus Dados (Chamar TI)` | `hostname` <br> `Get-NetIPAddress` | O usuário abre o chamado por telefone mas não sabe dizer o nome da máquina ou o IP para o acesso remoto. | Exibe de forma clara e visível na tela os dados de identificação do PC para repassar ao técnico. |
+| **09** | `9. Testar Conexão Sistema` | `Test-Connection -ComputerName [IP_Servidor] -Count 2` | Incerteza se a lentidão/queda é do computador local ou se o servidor do Prontuário Eletrônico (PEP) caiu. | Realiza um diagnóstico em tempo real, informando visualmente ao usuário se o servidor está online. |
+| **10** | `10. REINICIAR COMPUTADOR` | `shutdown /r /f /t 0` | Travamentos crônicos no Windows devido ao "Fast Startup" (recurso que hiberna o kernel e mantém bugs ativos). | Força o fechamento completo de todas as aplicações e realiza um boot 100% limpo na memória RAM. |
